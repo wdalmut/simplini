@@ -1,5 +1,5 @@
 <?php 
-class Config
+class Config implements ArrayAccess
 {
     private $_ini;
     
@@ -87,6 +87,11 @@ class Config
         }
     }
     
+    public function __unset($name)
+    {
+        throw new RuntimeException("You can't remove elements...");
+    }
+    
     public function __call($method, $args) 
     {
         return new Config($this->_ini[$method]);
@@ -100,5 +105,25 @@ class Config
     public function __set($name, $value)
     {
         throw new RuntimeException("You can't add elements at runtime..."); 
+    }
+    
+    public function offsetExists ($offset) {
+        return $this->exists($offset);
+    }
+    
+    public function offsetGet ($offset) {
+        if ($this->exists($offset)) {
+            return $this->_ini[$offset];
+        } else {
+            return false;
+        }
+    }
+    
+    public function offsetSet ($offset, $value) {
+        throw new RuntimeException("You can't add elements at runtime...");
+    }
+    
+    public function offsetUnset ($offset) {
+        throw new RuntimeException("You can't remove elements...");
     }
 }
