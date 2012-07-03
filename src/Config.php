@@ -36,13 +36,17 @@ class Config implements ArrayAccess
                 unset($ini[$key]);
             }
         }
-        
+
         $end = array();
         foreach ($ini as $k => $v) {
-            $end[$k] = array();
-            foreach ($v as $key => $value) {
-                $t = $this->_processKey(array(), $key, $value);
-                $end[$k] = array_merge_recursive($end[$k], $t);
+            if (is_array($v)) {
+                $end[$k] = array();
+                foreach ($v as $key => $value) {
+                    $t = $this->_processKey(array(), $key, $value);
+                    $end[$k] = array_merge_recursive($end[$k], $t);
+                }
+            } else {
+                $end[$k] = $v;
             }
         }
         

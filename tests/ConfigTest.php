@@ -17,6 +17,14 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     {
         $this->object->load("no-one.ini");
     }
+    
+    public function testSimpleConfig()
+    {
+        $this->object->load(__DIR__ . '/configs/simple.ini');
+        
+        $this->assertEquals("ciao", $this->object->hello);
+        $this->assertEquals("ok", $this->object->my);
+    }
 
     public function testBaseConfig()
     {
