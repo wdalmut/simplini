@@ -3,6 +3,9 @@
 A simple INI reader. This project is heavly inspired to
 `Zend_Config_Ini`
 
+## Unit Testing Status
+
+[![Build Status](https://secure.travis-ci.org/wdalmut/simplini.png)](http://travis-ci.org/wdalmut/simplini?branch=master)
 
 ## Sections
 
