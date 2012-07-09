@@ -120,8 +120,8 @@ $conf = new Config();
 $conf->load(__DIR__ . '/a.ini', true);
 
 echo $conf->prod()->a; // echo hello
-echo $conf->mysql()->host; // echo localhost
-echo $conf->redis()->host; // echo localhost
+echo $conf->mysql()->host; // echo 192.168.2.2
+echo $conf->redis()->host; // echo 192.168.3.3
 ```
 
 ### Override only one section
