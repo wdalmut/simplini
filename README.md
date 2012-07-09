@@ -59,6 +59,6 @@ a.b.c = "Hello"
 $conf = new Config();
 $conf->load(__DIR__ . '/my.ini');
 
-echo conf->a->b-c; // will echo "hello"
+echo conf->production()->a->b-c; // will echo "hello"
 ```
 
