@@ -119,7 +119,7 @@ host = 192.168.3.3
 $conf = new Config();
 $conf->load(__DIR__ . '/a.ini', true);
 
-echo $conf->prod()->a; // echo hello
+echo $conf->prod()->a; // echo ciao
 echo $conf->mysql()->host; // echo 192.168.2.2
 echo $conf->redis()->host; // echo 192.168.3.3
 ```
