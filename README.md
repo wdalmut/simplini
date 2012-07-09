@@ -84,3 +84,57 @@ echo $conf->mysql()->db->host; // localhost
 
 echo $conf->redis()->nosql->b->host; // 192.168.2.2
 ```
+
+## Override strategies
+
+You have three types of overrides.
+
+```ini
+[prod]
+a = hello
+
+[dev : prod]
+a = ciao
+
+[mysql]
+host = localhost
+
+[dm : mysql]
+host = 192.168.2.2
+
+[redis]
+host = localhost
+
+[rd : redis]
+host = 192.168.3.3
+```
+
+### Override all
+
+```php
+<?php
+$conf = new Config();
+$conf->load(__DIR__ . '/a.ini', true);
+```
+
+### Override only one section
+
+```php
+<?php
+$conf = new Config();
+$conf->load(__DIR__ . '/a.ini', 'dev');
+
+echo $conf->prod()->a; // echo ciao
+```
+
+### Override a group of sections
+
+```php
+<?php
+$conf = new Config();
+$conf->load(__DIR__ . '/a.ini', array('dev', 'dm'));
+
+echo $conf->prod()->a; // echo ciao
+echo $conf->mysql()->host; // echo 192.168.2.2
+echo $conf->redis()->host; // echo localhost
+```
