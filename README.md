@@ -45,7 +45,7 @@ $conf->load(__DIR__ . '/my.ini');
 var_dump(conf->a); // array(one,two,three)
 ```
 
-### Nested objects
+## Nested objects
 
 Nested Objects
 
@@ -62,3 +62,25 @@ $conf->load(__DIR__ . '/my.ini');
 echo conf->production()->a->b-c; // will echo "hello"
 ```
 
+## Multiple sections
+
+```ini
+[mysql]
+db.host = "localhost"
+db.user = "user"
+db.password = "password"
+
+[redis]
+nosql.a.host = "localhost"
+nosql.b.host = "192.168.2.2"
+```
+
+```php
+<?php
+$conf = new Config();
+$conf->load(__DIR__ . '/my.ini');
+
+echo $conf->mysql()->db->host; // localhost
+
+echo $conf->redis()->nosql->b->host; // 192.168.2.2
+```
