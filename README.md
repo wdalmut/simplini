@@ -115,6 +115,10 @@ host = 192.168.3.3
 <?php
 $conf = new Config();
 $conf->load(__DIR__ . '/a.ini', true);
+
+echo $conf->prod()->a; // echo hello
+echo $conf->mysql()->host; // echo localhost
+echo $conf->redis()->host; // echo localhost
 ```
 
 ### Override only one section
@@ -125,6 +129,8 @@ $conf = new Config();
 $conf->load(__DIR__ . '/a.ini', 'dev');
 
 echo $conf->prod()->a; // echo ciao
+echo $conf->mysql()->host; // echo localhost
+echo $conf->redis()->host; // echo localhost
 ```
 
 ### Override a group of sections
