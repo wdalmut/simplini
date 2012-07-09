@@ -21,6 +21,7 @@ class Config implements ArrayAccess
     
     private function _parse($ini, $env)
     {
+        // Override sections
         foreach ($ini as $key => $value) {
             if (strpos($key, ":") !== false) {
                 if ($env !== false) {
@@ -31,7 +32,19 @@ class Config implements ArrayAccess
                         $ini[$base] = array();
                     }
                     
-                    $ini[$base] = array_merge($ini[$base], $value);
+                    if (true === $env) {
+                        $ini[$base] = array_merge($ini[$base], $value);
+                    } else if (is_string($env)) {
+                        if ($ext == $env) {
+                            $ini[$base] = array_merge($ini[$base], $value);
+                        } 
+                    } else if (is_array($env)) {
+                        foreach ($env as $e) {
+                            if ($ext == $e) {
+                                $ini[$base] = array_merge($ini[$base], $value);
+                            }
+                        }
+                    }
                 }
                 unset($ini[$key]);
             }

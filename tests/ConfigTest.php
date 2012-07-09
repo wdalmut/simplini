@@ -72,6 +72,41 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->object->load(__DIR__ . '/configs/arrays.ini', "development");
         
         $this->markTestSkipped("Need a proposal...");
+    }
     
+    public function testOverrideMultipleSections()
+    {
+        $this->object->load(__DIR__ . '/configs/multiple-sections.ini');
+        
+        $this->assertEquals("ciao", $this->object->production()->hello);
+        $this->assertEquals("localhost", $this->object->mysql()->host);
+        $this->assertEquals("OK", $this->object->third()->value);
+    }
+    
+    public function testRewriteMultipleSections()
+    {
+        $this->object->load(__DIR__ . '/configs/multiple-sections.ini', true);
+    
+        $this->assertEquals("hello", $this->object->production()->hello);
+        $this->assertEquals("192.168.2.2", $this->object->mysql()->host);
+        $this->assertEquals("KO", $this->object->third()->value);
+    }
+    
+    public function testRewriteSingleSection()
+    {
+        $this->object->load(__DIR__ . '/configs/multiple-sections.ini', "development");
+        
+        $this->assertEquals("hello", $this->object->production()->hello);
+        $this->assertEquals("localhost", $this->object->mysql()->host);
+        $this->assertEquals("OK", $this->object->third()->value);
+    }
+    
+    public function testRewriteSubsetOfSections()
+    {
+        $this->object->load(__DIR__ . '/configs/multiple-sections.ini', array("development", "dthird"));
+        
+        $this->assertEquals("hello", $this->object->production()->hello);
+        $this->assertEquals("localhost", $this->object->mysql()->host);
+        $this->assertEquals("KO", $this->object->third()->value);
     }
 }
