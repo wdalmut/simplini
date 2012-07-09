@@ -17,7 +17,7 @@ b=hello
 a="ecco"
 ```
 
-If you read forcing the dev state:
+Force the dev state:
 
 ```php
 <?php
