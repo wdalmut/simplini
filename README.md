@@ -9,7 +9,7 @@ A simple INI reader. This project is heavly inspired to
 
 ## Sections
 
-Simplini allow multiple sections and section (multiple-section) override(s).
+Simplini allow multiple sections and section (multiple sections) override(s).
 
 ```ini
 [prod]
