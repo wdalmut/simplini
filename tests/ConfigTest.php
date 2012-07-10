@@ -74,9 +74,30 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->markTestSkipped("Need a proposal...");
     }
     
-    public function testOverrideMultipleSections()
+    public function testNoOverrideMultipleSections()
     {
         $this->object->load(__DIR__ . '/configs/multiple-sections.ini');
+        
+        $this->assertEquals("ciao", $this->object->production()->hello);
+        $this->assertEquals("localhost", $this->object->mysql()->host);
+        $this->assertEquals("OK", $this->object->third()->value);
+        
+        // Force no override
+        $this->object->load(__DIR__ . '/configs/multiple-sections.ini', false);
+        
+        $this->assertEquals("ciao", $this->object->production()->hello);
+        $this->assertEquals("localhost", $this->object->mysql()->host);
+        $this->assertEquals("OK", $this->object->third()->value);
+        
+        // Force no override
+        $this->object->load(__DIR__ . '/configs/multiple-sections.ini', array());
+        
+        $this->assertEquals("ciao", $this->object->production()->hello);
+        $this->assertEquals("localhost", $this->object->mysql()->host);
+        $this->assertEquals("OK", $this->object->third()->value);
+        
+        // Force no override
+        $this->object->load(__DIR__ . '/configs/multiple-sections.ini', '');
         
         $this->assertEquals("ciao", $this->object->production()->hello);
         $this->assertEquals("localhost", $this->object->mysql()->host);
