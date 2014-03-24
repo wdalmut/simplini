@@ -1,5 +1,16 @@
 {
     "name": "wdalmut/simplini",
+    "license": "MIT",
+    "description": "A simple INI reader. This project is heavly inspired to Zend_Config_Ini",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Walter Dal Mut",
+            "email": "walter.dalmut@gmail.com",
+            "homepage": "http://walterdalmut.com",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "classmap": [ "src/" ]
     }
