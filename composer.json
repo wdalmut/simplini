@@ -1,0 +1,6 @@
+{
+    "name": "wdalmut/simplini",
+    "autoload": {
+        "classmap": [ "src/" ]
+    }
+}

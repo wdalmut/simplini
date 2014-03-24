@@ -3,3 +3,5 @@
 .buildpath
 phpunit.xml
 /res
+vendor
+*.phar
